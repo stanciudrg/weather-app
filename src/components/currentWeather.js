@@ -12,6 +12,8 @@ export const fetchCurrentWeather = async (location) => {
 export const getCurrentWeather = async (location) => {
   const currentWeatherData = await fetchCurrentWeather(location);
   const simplifiedCurrentWeatherData = {
+    name: currentWeatherData.location.name,
+    country: currentWeatherData.location.country,
     condition: currentWeatherData.current.condition,
     temp: {
       c: currentWeatherData.current.temp_c,

@@ -7,4 +7,3 @@ const fetchSearchResults = async (parameters) => {
     const searchResults = await customFetch(url);
     return searchResults;
   };
-  
