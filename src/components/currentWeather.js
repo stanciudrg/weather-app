@@ -10,24 +10,24 @@ export const fetchCurrentWeather = async (location) => {
 
 // Fetches the currentWeatherData and returns an object containing only the data needed for this app
 export const getCurrentWeather = async (location) => {
-    const currentWeatherData = await fetchCurrentWeather(location);
-    const simplifiedCurrentWeatherData = {
-      condition: currentWeatherData.current.condition.text,
-      temp: {
-        c: currentWeatherData.current.temp_c,
-        f: currentWeatherData.current.temp_f,
-      },
-      feelsLike: {
-        c: currentWeatherData.current.feelslike_c,
-        f: currentWeatherData.current.feelslike_f,
-      },
-      humidity: currentWeatherData.current.humidity,
-      wind: {
-        direction: currentWeatherData.current.wind_dir,
-        kph: currentWeatherData.current.wind_kph,
-        mph: currentWeatherData.current.wind_mph,
-      },
-    };
-  
-    return simplifiedCurrentWeatherData;
+  const currentWeatherData = await fetchCurrentWeather(location);
+  const simplifiedCurrentWeatherData = {
+    condition: currentWeatherData.current.condition,
+    temp: {
+      c: currentWeatherData.current.temp_c,
+      f: currentWeatherData.current.temp_f,
+    },
+    feelsLike: {
+      c: currentWeatherData.current.feelslike_c,
+      f: currentWeatherData.current.feelslike_f,
+    },
+    humidity: currentWeatherData.current.humidity,
+    wind: {
+      direction: currentWeatherData.current.wind_dir,
+      kph: currentWeatherData.current.wind_kph,
+      mph: currentWeatherData.current.wind_mph,
+    },
   };
+
+  return simplifiedCurrentWeatherData;
+};
