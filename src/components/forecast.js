@@ -9,15 +9,12 @@ const fetchForecast = async (location) => {
   return forecastData;
 };
 
-// Fetches the forecastData and returns an object containing only the  data
-// needed for this app
-const getForecast = async (location) => {
-  const forecastData = await fetchForecast(location);
+// Returns an object containing the needed target properties only
+const simplifyFetchedData = (target) => {
   const simplifiedForecastData = {
     days: [],
   };
-
-  forecastData.forecast.forecastday.forEach((day) => {
+  target.forecast.forecastday.forEach((day) => {
     const customDay = {
       date: day.date,
       condition: day.day.condition,
