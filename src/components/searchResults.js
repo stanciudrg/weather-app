@@ -11,7 +11,7 @@ const fetchSearchResults = async (parameters) => {
 
 // Fetches the searchResults array and returns a new array of  objects that
 // contain only the data needed for this app
-  const simplifyFetchedData = (target) => {
+const simplifyFetchedData = (target) => {
   const simplifiedSearchResults = [];
 
   target.forEach((result) => {
@@ -25,3 +25,52 @@ const fetchSearchResults = async (parameters) => {
 
   return simplifiedSearchResults;
 };
+
+export default class SearchResults {
+  constructor(parameters) {
+    this.parameters = parameters;
+    this.data = {};
+    this.error = "noError";
+    this.container = document.createElement("div");
+  }
+
+  async init() {
+    try {
+      const searchResults = await fetchSearchResults(this.parameters);
+      const simplifiedSearchResults = simplifyFetchedData(searchResults);
+      this.setData(simplifiedSearchResults);
+      this.displayData();
+    } catch (error) {
+      this.setError(error);
+      this.displayError();
+    }
+  }
+
+  setData(data) {
+    this.data = data;
+  }
+
+  setError(error) {
+    this.error = error;
+  }
+
+  getData() {
+    return this.data;
+  }
+
+  getError() {
+    return this.error;
+  }
+
+  displayData() {
+    console.log(this.data);
+  }
+
+  displayError() {
+    console.log(this.error);
+  }
+
+  insertInto(element) {
+    element.appendChild(this.container);
+  }
+}
