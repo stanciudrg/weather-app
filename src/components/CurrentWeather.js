@@ -1,11 +1,10 @@
+import Weather from "./Weather";
 import customFetch from "./customFetch";
 
-export default class CurrentWeather {
+export default class CurrentWeather extends Weather {
   constructor(location) {
+    super();
     this.location = location;
-    this.data = {};
-    this.error = "noError";
-    this.container = document.createElement("div");
   }
 
   async init() {
@@ -21,24 +20,8 @@ export default class CurrentWeather {
     }
   }
 
-  setData(data) {
-    this.data = data;
-  }
-
-  getData() {
-    return this.data;
-  }
-
   displayData() {
     console.log(this.data);
-  }
-
-  setError(error) {
-    this.error = error;
-  }
-
-  getError() {
-    return this.error;
   }
 
   displayError() {
@@ -78,9 +61,5 @@ export default class CurrentWeather {
     };
 
     return simplifiedCurrentWeatherData;
-  }
-
-  insertInto(element) {
-    element.appendChild(this.container);
   }
 }
