@@ -1,29 +1,5 @@
 import customFetch from "./customFetch";
 
-// Returns an object containing the needed target properties only
-const simplifyFetchedData = (target) => {
-  const simplifiedCurrentWeatherData = {
-    name: target.location.name,
-    country: target.location.country,
-    condition: target.current.condition,
-    temp: {
-      c: target.current.temp_c,
-      f: target.current.temp_f,
-    },
-    feelsLike: {
-      c: target.current.feelslike_c,
-      f: target.current.feelslike_f,
-    },
-    humidity: target.current.humidity,
-    wind: {
-      direction: target.current.wind_dir,
-      kph: target.current.wind_kph,
-      mph: target.current.wind_mph,
-    },
-  };
-
-  return simplifiedCurrentWeatherData;
-};
 export default class CurrentWeather {
   constructor(location) {
     this.location = location;
@@ -35,7 +11,7 @@ export default class CurrentWeather {
   async init() {
     try {
       const currentWeatherData = await this.fetchData();
-      const simplifiedFetchedData = simplifyFetchedData(currentWeatherData);
+      const simplifiedFetchedData = CurrentWeather.simplifyFetchedData(currentWeatherData);
       this.setData(simplifiedFetchedData);
       this.displayData();
     } catch (error) {
@@ -76,6 +52,31 @@ export default class CurrentWeather {
     const currentWeatherData = await customFetch(url);
 
     return currentWeatherData;
+  }
+
+  // Returns an object containing the needed target properties only
+  static simplifyFetchedData(target) {
+    const simplifiedCurrentWeatherData = {
+      name: target.location.name,
+      country: target.location.country,
+      condition: target.current.condition,
+      temp: {
+        c: target.current.temp_c,
+        f: target.current.temp_f,
+      },
+      feelsLike: {
+        c: target.current.feelslike_c,
+        f: target.current.feelslike_f,
+      },
+      humidity: target.current.humidity,
+      wind: {
+        direction: target.current.wind_dir,
+        kph: target.current.wind_kph,
+        mph: target.current.wind_mph,
+      },
+    };
+
+    return simplifiedCurrentWeatherData;
   }
 
   insertInto(element) {
