@@ -1,15 +1,7 @@
 import customFetch from "./customFetch";
 
-// Fetches the current weather JSON file for a specified location
-// using the customFetch function
-export const fetchCurrentWeather = async (location) => {
-  const url = `https://api.weatherapi.com/v1/current.json?key=bd957ce5f33f49e692b105538240603&q=${location}`;
-  const currentWeatherData = await customFetch(url);
-  return currentWeatherData;
-};
-
 // Returns an object containing the needed target properties only
-export const simplifyFetchedData = (target) => {
+const simplifyFetchedData = (target) => {
   const simplifiedCurrentWeatherData = {
     name: target.location.name,
     country: target.location.country,
@@ -31,20 +23,19 @@ export const simplifyFetchedData = (target) => {
   };
 
   return simplifiedCurrentWeatherData;
-}
-export class CurrentWeather {
+};
+export default class CurrentWeather {
   constructor(location) {
     this.location = location;
     this.data = {};
     this.error = "noError";
-    this.container = document.createElement('div');
+    this.container = document.createElement("div");
   }
 
   async init() {
     try {
-      const currentWeatherData = await fetchCurrentWeather(this.location);
-      const simplifiedFetchedData =
-        simplifyFetchedData(currentWeatherData);
+      const currentWeatherData = await this.fetchData();
+      const simplifiedFetchedData = simplifyFetchedData(currentWeatherData);
       this.setData(simplifiedFetchedData);
       this.displayData();
     } catch (error) {
@@ -70,11 +61,21 @@ export class CurrentWeather {
   }
 
   displayData() {
-    console.log(this.data)
+    console.log(this.data);
   }
 
   displayError() {
     console.log(this.error);
+  }
+
+  // Fetches the current weather JSON file for a specified location using the
+  // customFetch function
+  async fetchData() {
+    if (!this.location) throw new Error("Location not provided");
+    const url = `https://api.weatherapi.com/v1/current.json?key=bd957ce5f33f49e692b105538240603&q=${this.location}`;
+    const currentWeatherData = await customFetch(url);
+
+    return currentWeatherData;
   }
 
   insertInto(element) {
