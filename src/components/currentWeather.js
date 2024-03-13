@@ -32,3 +32,52 @@ export const simplifyFetchedData = (target) => {
 
   return simplifiedCurrentWeatherData;
 }
+export class CurrentWeather {
+  constructor(location) {
+    this.location = location;
+    this.data = {};
+    this.error = "noError";
+    this.container = document.createElement('div');
+  }
+
+  async init() {
+    try {
+      const currentWeatherData = await fetchCurrentWeather(this.location);
+      const simplifiedFetchedData =
+        simplifyFetchedData(currentWeatherData);
+      this.setData(simplifiedFetchedData);
+      this.displayData();
+    } catch (error) {
+      this.setError(error);
+      this.displayError();
+    }
+  }
+
+  setData(data) {
+    this.data = data;
+  }
+
+  setError(error) {
+    this.error = error;
+  }
+
+  getData() {
+    return this.data;
+  }
+
+  getError() {
+    return this.error;
+  }
+
+  displayData() {
+    console.log(this.data)
+  }
+
+  displayError() {
+    console.log(this.error);
+  }
+
+  insertInto(element) {
+    element.appendChild(this.container);
+  }
+}
