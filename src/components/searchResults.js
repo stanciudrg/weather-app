@@ -1,14 +1,5 @@
 import customFetch from "./customFetch";
 
-// Fetches the search JSON file for a specified parameter using the customFetch
-// function
-const fetchSearchResults = async (parameters) => {
-  const url = `https://api.weatherapi.com/v1/search.json?key=bd957ce5f33f49e692b105538240603&q=${parameters}`;
-  const searchResults = await customFetch(url);
-
-  return searchResults;
-};
-
 // Fetches the searchResults array and returns a new array of  objects that
 // contain only the data needed for this app
 const simplifyFetchedData = (target) => {
@@ -36,7 +27,7 @@ export default class SearchResults {
 
   async init() {
     try {
-      const searchResults = await fetchSearchResults(this.parameters);
+      const searchResults = await this.fetchData();
       const simplifiedSearchResults = simplifyFetchedData(searchResults);
       this.setData(simplifiedSearchResults);
       this.displayData();
@@ -68,6 +59,16 @@ export default class SearchResults {
 
   displayError() {
     console.log(this.error);
+  }
+
+  // Fetches the search JSON file for a specified parameter using the customFetch
+  // function
+  async fetchData() {
+    if (!this.parameters) throw new Error("Search parameters not provided");
+    const url = `https://api.weatherapi.com/v1/search.json?key=bd957ce5f33f49e692b105538240603&q=${this.parameters}`;
+    const searchResults = await customFetch(url);
+
+    return searchResults;
   }
 
   insertInto(element) {
