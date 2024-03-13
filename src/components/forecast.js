@@ -37,3 +37,51 @@ const simplifyFetchedData = (target) => {
 
   return simplifiedForecastData;
 };
+export default class Forecast {
+  constructor(location) {
+    this.location = location;
+    this.data = {}
+    this.error = "noError";
+    this.container = document.createElement('div');
+  }
+
+  async init() {
+    try {
+      const forecastData = await fetchForecast(this.location);
+      const simplifiedFetchedData = simplifyFetchedData(forecastData);
+      this.setData(simplifiedFetchedData);
+      this.displayData();
+    } catch (error) {
+      this.setError(error);
+      this.displayError();
+    }
+  }
+
+  setData(data) {
+    this.data = data;
+  }
+
+  setError(error) {
+    this.error = error;
+  }
+
+  getData() {
+    return this.data;
+  }
+
+  getError() {
+    return this.error;
+  }
+
+  displayData() {
+    console.log(this.data);
+  }
+
+  displayError() {
+    console.log(this.error);
+  }
+
+  insertInto(element) {
+    element.appendChild(this.container);
+  }
+}
