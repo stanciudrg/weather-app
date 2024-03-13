@@ -1,22 +1,5 @@
 import customFetch from "./customFetch";
 
-// Fetches the searchResults array and returns a new array of  objects that
-// contain only the data needed for this app
-const simplifyFetchedData = (target) => {
-  const simplifiedSearchResults = [];
-
-  target.forEach((result) => {
-    const customSearchResult = {
-      id: result.id,
-      name: result.name,
-      country: result.country,
-    };
-    simplifiedSearchResults.push(customSearchResult);
-  });
-
-  return simplifiedSearchResults;
-};
-
 export default class SearchResults {
   constructor(parameters) {
     this.parameters = parameters;
@@ -28,7 +11,8 @@ export default class SearchResults {
   async init() {
     try {
       const searchResults = await this.fetchData();
-      const simplifiedSearchResults = simplifyFetchedData(searchResults);
+      const simplifiedSearchResults =
+        SearchResults.simplifyFetchedData(searchResults);
       this.setData(simplifiedSearchResults);
       this.displayData();
     } catch (error) {
@@ -69,6 +53,22 @@ export default class SearchResults {
     const searchResults = await customFetch(url);
 
     return searchResults;
+  }
+
+  // Returns an object containing the needed target properties only
+  static simplifyFetchedData(target) {
+    const simplifiedSearchResults = [];
+
+    target.forEach((result) => {
+      const customSearchResult = {
+        id: result.id,
+        name: result.name,
+        country: result.country,
+      };
+      simplifiedSearchResults.push(customSearchResult);
+    });
+
+    return simplifiedSearchResults;
   }
 
   insertInto(element) {
