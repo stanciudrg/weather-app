@@ -11,7 +11,8 @@ export default class CurrentWeather {
   async init() {
     try {
       const currentWeatherData = await this.fetchData();
-      const simplifiedFetchedData = CurrentWeather.simplifyFetchedData(currentWeatherData);
+      const simplifiedFetchedData =
+        CurrentWeather.simplifyFetchedData(currentWeatherData);
       this.setData(simplifiedFetchedData);
       this.displayData();
     } catch (error) {
@@ -24,20 +25,20 @@ export default class CurrentWeather {
     this.data = data;
   }
 
-  setError(error) {
-    this.error = error;
-  }
-
   getData() {
     return this.data;
   }
 
-  getError() {
-    return this.error;
-  }
-
   displayData() {
     console.log(this.data);
+  }
+
+  setError(error) {
+    this.error = error;
+  }
+
+  getError() {
+    return this.error;
   }
 
   displayError() {

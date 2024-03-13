@@ -25,20 +25,20 @@ export default class SearchResults {
     this.data = data;
   }
 
-  setError(error) {
-    this.error = error;
-  }
-
   getData() {
     return this.data;
   }
 
-  getError() {
-    return this.error;
-  }
-
   displayData() {
     console.log(this.data);
+  }
+
+  setError(error) {
+    this.error = error;
+  }
+
+  getError() {
+    return this.error;
   }
 
   displayError() {
