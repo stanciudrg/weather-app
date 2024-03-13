@@ -1,20 +1,22 @@
 import customFetch from "./customFetch";
 
-// Fetches the forecast JSON file for a specified location
-// using the customFetch function
-export const fetchForecast = async (location) => {
+// Fetches the forecast JSON file for a specified location using the customFetch
+// function
+const fetchForecast = async (location) => {
   const url = `https://api.weatherapi.com/v1/forecast.json?key=bd957ce5f33f49e692b105538240603&q=${location}&days=3`;
   const forecastData = await customFetch(url);
+
   return forecastData;
 };
 
-// Fetches the forecastData and returns an object containing only the data needed for this app
-export const getForecast = async (location) => {
+// Fetches the forecastData and returns an object containing only the  data
+// needed for this app
+const getForecast = async (location) => {
   const forecastData = await fetchForecast(location);
   const simplifiedForecastData = {
     days: [],
   };
-  
+
   forecastData.forecast.forecastday.forEach((day) => {
     const customDay = {
       date: day.date,
@@ -36,5 +38,5 @@ export const getForecast = async (location) => {
     simplifiedForecastData.days.push(customDay);
   });
 
-  return { forecastData, simplifiedForecastData };
+  return simplifiedForecastData;
 };
