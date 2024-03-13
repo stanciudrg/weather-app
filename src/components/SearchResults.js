@@ -1,11 +1,10 @@
+import Weather from "./Weather";
 import customFetch from "./customFetch";
 
-export default class SearchResults {
+export default class SearchResults extends Weather {
   constructor(parameters) {
+    super();
     this.parameters = parameters;
-    this.data = {};
-    this.error = "noError";
-    this.container = document.createElement("div");
   }
 
   async init() {
@@ -21,24 +20,8 @@ export default class SearchResults {
     }
   }
 
-  setData(data) {
-    this.data = data;
-  }
-
-  getData() {
-    return this.data;
-  }
-
   displayData() {
     console.log(this.data);
-  }
-
-  setError(error) {
-    this.error = error;
-  }
-
-  getError() {
-    return this.error;
   }
 
   displayError() {
@@ -69,9 +52,5 @@ export default class SearchResults {
     });
 
     return simplifiedSearchResults;
-  }
-
-  insertInto(element) {
-    element.appendChild(this.container);
   }
 }
