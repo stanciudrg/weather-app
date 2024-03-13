@@ -1,14 +1,5 @@
 import customFetch from "./customFetch";
 
-// Fetches the forecast JSON file for a specified location using the customFetch
-// function
-const fetchForecast = async (location) => {
-  const url = `https://api.weatherapi.com/v1/forecast.json?key=bd957ce5f33f49e692b105538240603&q=${location}&days=3`;
-  const forecastData = await customFetch(url);
-
-  return forecastData;
-};
-
 // Returns an object containing the needed target properties only
 const simplifyFetchedData = (target) => {
   const simplifiedForecastData = {
@@ -40,14 +31,14 @@ const simplifyFetchedData = (target) => {
 export default class Forecast {
   constructor(location) {
     this.location = location;
-    this.data = {}
+    this.data = {};
     this.error = "noError";
-    this.container = document.createElement('div');
+    this.container = document.createElement("div");
   }
 
   async init() {
     try {
-      const forecastData = await fetchForecast(this.location);
+      const forecastData = await this.fetchData();;
       const simplifiedFetchedData = simplifyFetchedData(forecastData);
       this.setData(simplifiedFetchedData);
       this.displayData();
@@ -79,6 +70,15 @@ export default class Forecast {
 
   displayError() {
     console.log(this.error);
+  }
+
+  // Fetches the current weather JSON file for a specified location using the
+  // customFetch function
+  async fetchData() {
+    const url = `https://api.weatherapi.com/v1/forecast.json?key=bd957ce5f33f49e692b105538240603&q=${this.location}&days=3`;
+    const forecastData = await customFetch(url);
+  
+    return forecastData;
   }
 
   insertInto(element) {
