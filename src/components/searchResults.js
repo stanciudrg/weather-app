@@ -11,11 +11,10 @@ const fetchSearchResults = async (parameters) => {
 
 // Fetches the searchResults array and returns a new array of  objects that
 // contain only the data needed for this app
-const getSearchResults = async (parameters) => {
-  const searchResults = await fetchSearchResults(parameters);
+  const simplifyFetchedData = (target) => {
   const simplifiedSearchResults = [];
 
-  searchResults.forEach((result) => {
+  target.forEach((result) => {
     const customSearchResult = {
       id: result.id,
       name: result.name,
