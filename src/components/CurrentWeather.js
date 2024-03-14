@@ -1,5 +1,6 @@
 import Weather from "./Weather";
 import customFetch from "./customFetch";
+import { measurementScales } from "./measurementScales";
 
 export default class CurrentWeather extends Weather {
   constructor(location) {
@@ -9,6 +10,8 @@ export default class CurrentWeather extends Weather {
 
   async init() {
     super.init();
+    this.container.id = 'current-weather';
+    this.insertInto(document.querySelector('body'));
 
     try {
       const currentWeatherData = await this.fetchData();
@@ -48,19 +51,12 @@ export default class CurrentWeather extends Weather {
       name: target.location.name,
       country: target.location.country,
       condition: target.current.condition,
-      temp: {
-        c: target.current.temp_c,
-        f: target.current.temp_f,
-      },
-      feelsLike: {
-        c: target.current.feelslike_c,
-        f: target.current.feelslike_f,
-      },
+      temp: target.current[`temp_${measurementScales.temperature}`],
+      feelsLike: target.current[`feelslike_${measurementScales.temperature}`],
       humidity: target.current.humidity,
       wind: {
         direction: target.current.wind_dir,
-        kph: target.current.wind_kph,
-        mph: target.current.wind_mph,
+        speed: target.current[`wind_${measurementScales.speed}`],
       },
     };
 

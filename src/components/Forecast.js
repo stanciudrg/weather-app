@@ -1,5 +1,6 @@
 import Weather from "./Weather";
 import customFetch from "./customFetch";
+import { measurementScales } from "./measurementScales";
 
 export default class Forecast extends Weather {
   constructor(location) {
@@ -9,6 +10,7 @@ export default class Forecast extends Weather {
 
   async init() {
     super.init();
+    this.insertInto(document.querySelector('body'));
 
     try {
       const forecastData = await this.fetchData();
@@ -49,18 +51,9 @@ export default class Forecast extends Weather {
       const customDay = {
         date: day.date,
         condition: day.day.condition,
-        avgTemp: {
-          c: day.day.avgtemp_c,
-          f: day.day.avgtemp_f,
-        },
-        maxTemp: {
-          c: day.day.maxtemp_c,
-          f: day.day.maxtemp_f,
-        },
-        minTemp: {
-          c: day.day.mintemp_c,
-          f: day.day.mintemp_f,
-        },
+        avgTemp: day.day[`avgtemp_${measurementScales.temperature}`],
+        maxTemp: day.day[`maxtemp_${measurementScales.temperature}`],
+        minTemp: day.day[`mintemp_${measurementScales.temperature}`],
         chanceOfRain: day.day.daily_chance_of_rain,
       };
       simplifiedForecastData.days.push(customDay);

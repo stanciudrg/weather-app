@@ -9,6 +9,7 @@ export default class SearchResults extends Weather {
 
   async init() {
     super.init();
+    this.insertInto(document.querySelector('body'));
 
     try {
       const searchResults = await this.fetchData();
