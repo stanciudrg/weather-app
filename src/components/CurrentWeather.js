@@ -8,6 +8,8 @@ export default class CurrentWeather extends Weather {
   }
 
   async init() {
+    super.init();
+
     try {
       const currentWeatherData = await this.fetchData();
       const simplifiedFetchedData =
@@ -22,10 +24,12 @@ export default class CurrentWeather extends Weather {
 
   displayData() {
     console.log(this.data);
+    this.loadingAnimation.remove();
   }
 
   displayError() {
     console.log(this.error);
+    this.loadingAnimation.remove();
   }
 
   // Fetches the current weather JSON file for a specified location using the

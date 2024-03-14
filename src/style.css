@@ -1,0 +1,31 @@
+.loading-animation {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: auto;
+}
+
+.dual-ring {
+    content: " ";
+    width: 64px;
+    height: 64px;
+    display: block;
+    border-radius: 50%;
+    border: 6px solid;
+    border-color: black transparent black transparent;
+    margin: 8px;
+    animation: dual-ring 1.2s linear infinite;
+}
+
+@keyframes dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

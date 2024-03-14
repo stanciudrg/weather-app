@@ -8,6 +8,8 @@ export default class SearchResults extends Weather {
   }
 
   async init() {
+    super.init();
+
     try {
       const searchResults = await this.fetchData();
       const simplifiedSearchResults =
@@ -21,15 +23,17 @@ export default class SearchResults extends Weather {
   }
 
   displayData() {
+    this.loadingAnimation.remove();
     console.log(this.data);
   }
 
   displayError() {
+    this.loadingAnimation.remove();
     console.log(this.error);
   }
 
-  // Fetches the search JSON file for a specified parameter using the customFetch
-  // function
+  // Fetches the search JSON file for the specified parameters using the
+  // customFetch function
   async fetchData() {
     if (!this.parameters) throw new Error("Search parameters not provided");
     const url = `https://api.weatherapi.com/v1/search.json?key=bd957ce5f33f49e692b105538240603&q=${this.parameters}`;

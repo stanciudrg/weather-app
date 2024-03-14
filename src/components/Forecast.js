@@ -8,6 +8,8 @@ export default class Forecast extends Weather {
   }
 
   async init() {
+    super.init();
+
     try {
       const forecastData = await this.fetchData();
       const simplifiedFetchedData = Forecast.simplifyFetchedData(forecastData);
@@ -21,13 +23,15 @@ export default class Forecast extends Weather {
 
   displayData() {
     console.log(this.data);
+    this.loadingAnimation.remove();
   }
 
   displayError() {
     console.log(this.error);
+    this.loadingAnimation.remove();
   }
 
-  // Fetches the current weather JSON file for a specified location using the
+  // Fetches the forecast JSON file for a specified location using the
   // customFetch function
   async fetchData() {
     const url = `https://api.weatherapi.com/v1/forecast.json?key=bd957ce5f33f49e692b105538240603&q=${this.location}&days=3`;

@@ -3,6 +3,15 @@ export default class Weather {
         this.data = {};
         this.error = "noError";
         this.container = document.createElement('div');
+        this.loadingAnimation = document.createElement('div');
+        this.dualRing = document.createElement('div');
+    }
+
+    init() {
+        this.loadingAnimation.classList.add('loading-animation');
+        this.dualRing.classList.add('dual-ring');
+        this.loadingAnimation.appendChild(this.dualRing);
+        this.container.appendChild(this.loadingAnimation);
     }
 
     setData(data) {
