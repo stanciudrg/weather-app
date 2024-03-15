@@ -1,4 +1,4 @@
-export default class Weather {
+export default class WeatherWidget {
     constructor() {
         this.data = {};
         this.error = "noError";

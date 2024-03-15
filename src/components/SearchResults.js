@@ -1,7 +1,7 @@
-import Weather from "./Weather";
+import WeatherWidget from "./WeatherWidget";
 import customFetch from "./customFetch";
 
-export default class SearchResults extends Weather {
+export default class SearchResults extends WeatherWidget {
   constructor(parameters) {
     super();
     this.parameters = parameters;

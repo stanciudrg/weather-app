@@ -1,8 +1,8 @@
-import Weather from "./Weather";
+import WeatherWidget from "./WeatherWidget";
 import customFetch from "./customFetch";
 import { measurementScales } from "./measurementScales";
 
-export default class Forecast extends Weather {
+export default class Forecast extends WeatherWidget {
   constructor(location) {
     super();
     this.location = location;
