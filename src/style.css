@@ -1,3 +1,68 @@
+/* Font style declarations */
+
+@font-face {
+    font-family: 'URWGeometric';
+    src: url('./fonts/URWGeometric-Light.woff');
+    font-weight: 300;
+    font-style: normal;
+    unicode-range: U+000-5FF;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'URWGeometric';
+    src: url('./fonts/URWGeometric-Regular.woff');
+    font-weight: 400;
+    font-style: normal;
+    unicode-range: U+000-5FF;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'URWGeometric';
+    src: url('./fonts/URWGeometric-Medium.woff');
+    font-weight: 500;
+    font-style: normal;
+    unicode-range: U+000-5FF;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'URWGeometric';
+    src: url('./fonts/URWGeometric-SemiBold.woff');
+    font-weight: 600;
+    font-style: normal;
+    unicode-range: U+000-5FF;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'URWGeometric';
+    src: url('./fonts/URWGeometric-Bold.woff');
+    font-weight: 700;
+    font-style: italic;
+    unicode-range: U+000-5FF;
+    font-display: swap;
+}
+
+* {
+    --color1: #D1D1D1;
+    --color2: #F4F4F4;
+    --color3: #C7C7C7;
+    --color4: #3E3E3E;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    /* Disables the colored highlight that is supposed to appear over a link while it's being 
+    tapped but also appears over button elements on mobile devices */
+    -webkit-tap-highlight-color: transparent;
+    margin: 0;
+    padding: 0;
+}
+
 .loading-animation {
     display: grid;
     align-items: center;
