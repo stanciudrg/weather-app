@@ -353,33 +353,332 @@
 /*!*****************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/style.css ***!
   \*****************************************************************/
+/* Font style declarations */
+
+@font-face {
+  font-family: "URWGeometric";
+  src: url(fonts/36a06d400c3bb9e5f624.woff);
+  font-weight: 300;
+  font-style: normal;
+  unicode-range: U+000-5FF;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "URWGeometric";
+  src: url(fonts/1b74175f282e7c2bed7f.woff);
+  font-weight: 400;
+  font-style: normal;
+  unicode-range: U+000-5FF;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "URWGeometric";
+  src: url(fonts/6501409de871adeb8d7f.woff);
+  font-weight: 500;
+  font-style: normal;
+  unicode-range: U+000-5FF;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "URWGeometric";
+  src: url(fonts/308547cf6680a07526db.woff);
+  font-weight: 600;
+  font-style: normal;
+  unicode-range: U+000-5FF;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "URWGeometric";
+  src: url(fonts/daeffe692c6a12a720a6.woff);
+  font-weight: 700;
+  font-style: italic;
+  unicode-range: U+000-5FF;
+  font-display: swap;
+}
+
+* {
+  --color1: #d1d1d1;
+  --color2: #f4f4f4;
+  --color3: #c7c7c7;
+  --color4: #3e3e3e;
+  --color5: #696969;
+}
+
+*,
+*::after,
+*::before {
+  font-family:
+    "URWGeometric",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  box-sizing: border-box;
+  /* Disables the colored highlight that is supposed to appear over a link while it's being 
+    tapped but also appears over button elements on mobile devices */
+  -webkit-tap-highlight-color: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #ebebeb;
+  padding: 1rem;
+}
+
+/* API fetch loading animation - used by all Weather Widgets by default */
 .loading-animation {
-    display: grid;
-    align-items: center;
-    background-color: transparent;
-    border-radius: 1rem;
-    padding: 1rem;
-    margin: auto;
+  display: grid;
+  align-items: center;
+  background-color: transparent;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: auto;
 }
 
 .dual-ring {
-    content: " ";
-    width: 64px;
-    height: 64px;
-    display: block;
-    border-radius: 50%;
-    border: 6px solid;
-    border-color: black transparent black transparent;
-    margin: 8px;
-    animation: dual-ring 1.2s linear infinite;
+  content: " ";
+  width: 64px;
+  height: 64px;
+  display: block;
+  border-radius: 50%;
+  border: 6px solid;
+  border-color: #3e3e3e transparent #3e3e3e transparent;
+  margin: 8px;
+  animation: dual-ring 1.2s linear infinite;
 }
 
 @keyframes dual-ring {
-    0% {
-        transform: rotate(0deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
 
-    100% {
-        transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
+  }
 }
+
+/*!****************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/components/CurrentWeather/CurrentWeather.css ***!
+  \****************************************************************************************************/
+#current-weather {
+  min-width: 400px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-image: linear-gradient(
+    to right top,
+    #f4f4f4,
+    #f5f6f5,
+    #f7f7f7,
+    #f8f9f8,
+    #fafafa
+  );
+  margin: 0 auto 1rem auto;
+  border: 0.2px solid var(--color1);
+  border-radius: 1rem;
+}
+
+#current-weather:hover {
+  box-shadow: 2px 5px 15px 0 rgba(0, 0, 0, 0.05);
+}
+
+.current-weather_location {
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--color5);
+  padding: 2rem 1.5rem 0 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.current-weather_temperature {
+  font-size: 6rem;
+  font-weight: 100;
+  color: var(--color5);
+  padding: 0 1.5rem;
+}
+
+.current-weather_temperature::after {
+  position: absolute;
+  content: "°";
+}
+
+.current-weather_condition {
+  width: 100%;
+  padding: 0 1.5rem;
+}
+
+.current-weather_condition-text {
+  font-size: 2rem;
+  color: var(--color5);
+  text-transform: lowercase;
+}
+
+.current-weather_additional-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  background-color: var(--color2);
+  color: var(--color4);
+  padding: 1rem 1.5rem;
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+  text-transform: uppercase;
+}
+
+.current-weather_feelslike,
+.current-weather_humidity,
+.current-weather_wind {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.current-weather_feelslike-title,
+.current-weather_humidity-title,
+.current-weather_wind-title {
+  font-weight: 300;
+}
+
+.current-weather_error {
+  display: flex;
+  flex-direction: column;
+  color: var(--color5);
+  padding: 2rem;
+  gap: 0.5rem;
+}
+
+.current-weather_error-title {
+  font-weight: 400;
+}
+
+.current-weather_error-value {
+  font-size: 1.1rem;
+}
+
+/*!****************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/components/Forecast/Forecast.css ***!
+  \****************************************************************************************/
+#forecast {
+  min-width: 400px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(
+    to right top,
+    #f4f4f4,
+    #f5f6f5,
+    #f7f7f7,
+    #f8f9f8,
+    #fafafa
+  );
+  margin: auto;
+  border: 0.2px solid var(--color1);
+  border-radius: 1rem;
+}
+
+#forecast:hover {
+  box-shadow: 2px 5px 15px 0 rgba(0, 0, 0, 0.05);
+}
+
+.forecast_title {
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--color5);
+  padding: 1rem 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.forecast_days {
+  display: flex;
+  flex-direction: column;
+  color: var(--color5);
+}
+
+.forecast_day {
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+  border-top: 0.2px solid var(--color1);
+}
+
+.forecast_day-primary-info {
+  min-width: 162px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 2rem;
+}
+
+.forecast_day-title {
+  width: 56px;
+  margin-right: 1.5rem;
+}
+
+.forecast_day-condition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.forecast_day-condition-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.forecast_day-condition-cor {
+  font-size: 14px;
+  font-weight: bold;
+  color: #2284e6;
+}
+
+.forecast_day-secondary-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.forecast_day-min-temp,
+.forecast_day-max-temp {
+  width: 22px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.forecast_day-min-temp {
+  color: #1170ed;
+}
+
+.forecast_day-max-temp {
+  color: #ff8100;
+}
+
+.forecast_day-temp-dash {
+  width: 80px;
+  height: 4px;
+  background-image: linear-gradient(
+    to right in oklab,
+    #1170ed 0%,
+    #ff8100 100%
+  );
+  border-radius: 30rem;
+}
+
