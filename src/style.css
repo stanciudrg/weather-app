@@ -1,102 +1,115 @@
 /* Font style declarations */
 
 @font-face {
-    font-family: 'URWGeometric';
-    src: url('./fonts/URWGeometric-Light.woff');
-    font-weight: 300;
-    font-style: normal;
-    unicode-range: U+000-5FF;
-    font-display: swap;
+  font-family: "URWGeometric";
+  src: url("./fonts/URWGeometric-Light.woff");
+  font-weight: 300;
+  font-style: normal;
+  unicode-range: U+000-5FF;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'URWGeometric';
-    src: url('./fonts/URWGeometric-Regular.woff');
-    font-weight: 400;
-    font-style: normal;
-    unicode-range: U+000-5FF;
-    font-display: swap;
+  font-family: "URWGeometric";
+  src: url("./fonts/URWGeometric-Regular.woff");
+  font-weight: 400;
+  font-style: normal;
+  unicode-range: U+000-5FF;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'URWGeometric';
-    src: url('./fonts/URWGeometric-Medium.woff');
-    font-weight: 500;
-    font-style: normal;
-    unicode-range: U+000-5FF;
-    font-display: swap;
+  font-family: "URWGeometric";
+  src: url("./fonts/URWGeometric-Medium.woff");
+  font-weight: 500;
+  font-style: normal;
+  unicode-range: U+000-5FF;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'URWGeometric';
-    src: url('./fonts/URWGeometric-SemiBold.woff');
-    font-weight: 600;
-    font-style: normal;
-    unicode-range: U+000-5FF;
-    font-display: swap;
+  font-family: "URWGeometric";
+  src: url("./fonts/URWGeometric-SemiBold.woff");
+  font-weight: 600;
+  font-style: normal;
+  unicode-range: U+000-5FF;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'URWGeometric';
-    src: url('./fonts/URWGeometric-Bold.woff');
-    font-weight: 700;
-    font-style: italic;
-    unicode-range: U+000-5FF;
-    font-display: swap;
+  font-family: "URWGeometric";
+  src: url("./fonts/URWGeometric-Bold.woff");
+  font-weight: 700;
+  font-style: italic;
+  unicode-range: U+000-5FF;
+  font-display: swap;
 }
 
 * {
-    --color1: #D1D1D1;
-    --color2: #F4F4F4;
-    --color3: #C7C7C7;
-    --color4: #3E3E3E;
-    --color5: #696969;
+  --color1: #d1d1d1;
+  --color2: #f4f4f4;
+  --color3: #c7c7c7;
+  --color4: #3e3e3e;
+  --color5: #696969;
 }
 
 *,
 *::after,
 *::before {
-    font-family: 'URWGeometric', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    box-sizing: border-box;
-    /* Disables the colored highlight that is supposed to appear over a link while it's being 
+  font-family:
+    "URWGeometric",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  box-sizing: border-box;
+  /* Disables the colored highlight that is supposed to appear over a link while it's being 
     tapped but also appears over button elements on mobile devices */
-    -webkit-tap-highlight-color: transparent;
-    margin: 0;
-    padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background-color: #EBEBEB;
+  background-color: #ebebeb;
+  padding: 1rem;
 }
 
 /* API fetch loading animation - used by all Weather Widgets by default */
 .loading-animation {
-    display: grid;
-    align-items: center;
-    background-color: transparent;
-    border-radius: 1rem;
-    padding: 1rem;
-    margin: auto;
+  display: grid;
+  align-items: center;
+  background-color: transparent;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: auto;
 }
 
 .dual-ring {
-    content: " ";
-    width: 64px;
-    height: 64px;
-    display: block;
-    border-radius: 50%;
-    border: 6px solid;
-    border-color: #3E3E3E transparent #3E3E3E transparent;
-    margin: 8px;
-    animation: dual-ring 1.2s linear infinite;
+  content: " ";
+  width: 64px;
+  height: 64px;
+  display: block;
+  border-radius: 50%;
+  border: 6px solid;
+  border-color: #3e3e3e transparent #3e3e3e transparent;
+  margin: 8px;
+  animation: dual-ring 1.2s linear infinite;
 }
 
 @keyframes dual-ring {
-    0% {
-        transform: rotate(0deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
 
-    100% {
-        transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
+  }
 }
