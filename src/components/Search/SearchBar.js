@@ -8,7 +8,7 @@ export default class SearchBar {
     this.container = document.createElement("div");
     this.inputWrapper = document.createElement("div");
     this.inputWrapper.innerHTML = searchIcon;
-    this.searchIcon = this.inputWrapper.querySelector('svg');
+    this.searchIcon = this.inputWrapper.querySelector("svg");
     this.searchInput = document.createElement("input");
     this.clearButton = document.createElement("button");
     this.DOMLocation = DOMLocation;
@@ -33,6 +33,7 @@ export default class SearchBar {
 
     this.searchInput.id = "search";
     this.searchInput.setAttribute("type", "search");
+    this.searchInput.setAttribute("autocomplete", "off");
     this.searchInput.addEventListener("focus", this.debounceSearchAction);
     this.searchInput.addEventListener("input", this.debounceSearchAction);
     this.searchInput.addEventListener("input", this.toggleClearButton);
@@ -45,7 +46,7 @@ export default class SearchBar {
     this.clearButton
       .querySelector("svg")
       .classList.add("search_clear-button-icon");
-      this.inputWrapper.appendChild(this.clearButton);
+    this.inputWrapper.appendChild(this.clearButton);
   }
 
   removeSearchResults = () => {

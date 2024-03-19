@@ -1,7 +1,7 @@
 import "./CurrentWeather.css";
 import WeatherWidget from "../WeatherWidget";
-import customFetch from "../customFetch";
-import measurementScales from "../measurementScales";
+import customFetch from "../helpers/customFetch";
+import measurementScales from "../helpers/measurementScales";
 
 export default class CurrentWeather extends WeatherWidget {
   constructor(location) {

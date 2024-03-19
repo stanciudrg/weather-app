@@ -1,8 +1,8 @@
 import { isToday, parseISO, intlFormatDistance, format } from "date-fns";
 import "./Forecast.css";
 import WeatherWidget from "../WeatherWidget";
-import customFetch from "../customFetch";
-import measurementScales from "../measurementScales";
+import customFetch from "../helpers/customFetch";
+import measurementScales from "../helpers/measurementScales";
 
 export default class Forecast extends WeatherWidget {
   constructor(location) {

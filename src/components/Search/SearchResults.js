@@ -1,5 +1,5 @@
 import WeatherWidget from "../WeatherWidget";
-import customFetch from "../customFetch";
+import customFetch from "../helpers/customFetch";
 import "./SearchResults.css";
 
 export default class SearchResults extends WeatherWidget {
@@ -37,23 +37,23 @@ export default class SearchResults extends WeatherWidget {
       return;
     }
 
-    const resultsList = document.createElement('ul');
-    resultsList.classList.add('search-results_list');
+    const resultsList = document.createElement("ul");
+    resultsList.classList.add("search-results_list");
     this.container.appendChild(resultsList);
 
     this.data.forEach((result) => {
-      const li = document.createElement('li');
-      li.classList.add('search-results_result');
-      li.dataset.id =  result.id;
+      const li = document.createElement("li");
+      li.classList.add("search-results_result");
+      li.dataset.id = result.id;
       li.textContent = `${result.name}, ${result.country}`;
-      li.addEventListener('mousedown', this.requestWeatherWidgets);
+      li.addEventListener("mousedown", this.requestWeatherWidgets);
       resultsList.appendChild(li);
-    })
+    });
   }
 
   displayError() {
     this.loadingAnimation.remove();
-    
+
     const errorMessage = document.createElement("div");
     errorMessage.classList.add("search-results_error");
     this.container.appendChild(errorMessage);
@@ -71,7 +71,7 @@ export default class SearchResults extends WeatherWidget {
 
   requestWeatherWidgets = (e) => {
     this.callback(e.target.dataset.id);
-  }
+  };
 
   // Fetches the search JSON file for the specified parameters using the
   // customFetch function
@@ -100,11 +100,11 @@ export default class SearchResults extends WeatherWidget {
   }
 
   destroy() {
-    const results = this.container.querySelectorAll('li');
+    const results = this.container.querySelectorAll("li");
 
     results.forEach((result) => {
-      result.removeEventListener('mousedown', this.requestWeatherWidgets);
-    })
+      result.removeEventListener("mousedown", this.requestWeatherWidgets);
+    });
 
     super.destroy();
   }
