@@ -4,11 +4,13 @@ import clearIcon from "../../inline-svg/clear.svg";
 import SearchResults from "./SearchResults";
 
 export default class SearchBar {
-  constructor(DOMLocation) {
+  constructor(DOMLocation, callback) {
     this.container = document.createElement("div");
     this.searchInput = document.createElement("input");
     this.clearButton = document.createElement("button");
     this.DOMLocation = DOMLocation;
+    this.searchResults = "";
+    this.callback = callback;
   }
 
   init() {
@@ -30,12 +32,11 @@ export default class SearchBar {
 
     this.searchInput.id = "search";
     this.searchInput.setAttribute("type", "search");
-    const debounceSearchAction = SearchBar.debounce(
-      SearchBar.getSearchResults,
-      500,
-    );
+    const debounceSearchAction = SearchBar.debounce(this.getSearchResults, 500);
+    this.searchInput.addEventListener("focus", debounceSearchAction);
     this.searchInput.addEventListener("input", debounceSearchAction);
     this.searchInput.addEventListener("input", this.toggleClearButton);
+    this.searchInput.addEventListener("blur", this.removeSearchResults);
     inputWrapper.appendChild(this.searchInput);
 
     this.clearButton.classList.add("search_clear-button");
@@ -47,12 +48,17 @@ export default class SearchBar {
     inputWrapper.appendChild(this.clearButton);
   }
 
-  static getSearchResults(e) {
-    if (e.target.value.length > 0) {
-      const searchResults = new SearchResults(e.target.value);
-      searchResults.init();
-    }
-  }
+  removeSearchResults = () => {
+    if (this.searchResults) this.searchResults.destroy();
+  };
+
+  getSearchResults = (e) => {
+    if (this.searchResults) this.searchResults.destroy();
+    if (e.target.value.length === 0) return;
+    if (document.activeElement !== e.target) return;
+    this.searchResults = new SearchResults(e.target.value, this.callback);
+    this.searchResults.init();
+  };
 
   static debounce(callback, waitTime) {
     let timer;
@@ -80,6 +86,7 @@ export default class SearchBar {
 
   clearSearchBar = () => {
     this.searchInput.value = "";
+    this.searchInput.dispatchEvent(new Event("input"));
     this.focusSearchBar();
     this.toggleClearButton();
   };

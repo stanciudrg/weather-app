@@ -33,4 +33,8 @@ export default class WeatherWidget {
     insertInto(element) {
         element.appendChild(this.container);
     }
+
+    destroy() {
+        this.container.remove();
+    }
 }

@@ -13,7 +13,7 @@
     #f8f9f8,
     #fafafa
   );
-  margin: 0 auto 1rem auto;
+  margin: 4rem auto 1rem auto;
   border: 0.2px solid var(--color1);
   border-radius: 1rem;
 }

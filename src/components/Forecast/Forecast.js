@@ -3,8 +3,6 @@ import "./Forecast.css";
 import WeatherWidget from "../WeatherWidget";
 import customFetch from "../customFetch";
 import measurementScales from "../measurementScales";
-import arrowDownIcon from '../../inline-svg/arrow-down.svg';
-import arrowUpIcon from '../../inline-svg/arrow-up.svg';
 
 export default class Forecast extends WeatherWidget {
   constructor(location) {
@@ -96,16 +94,16 @@ export default class Forecast extends WeatherWidget {
     this.loadingAnimation.remove();
     
     const errorMessage = document.createElement('div');
-    errorMessage.classList.add('current-weather_error');
+    errorMessage.classList.add('forecast_error');
     this.container.appendChild(errorMessage);
 
     const errorTitle = document.createElement('h2');
-    errorTitle.classList.add('current-weather_error-title');
+    errorTitle.classList.add('forecast_error-title');
     errorTitle.textContent = 'Unable to retrieve weather data';
     errorMessage.appendChild(errorTitle);
 
     const errorValue = document.createElement('p');
-    errorValue.classList.add('current-weather_error-value');
+    errorValue.classList.add('forecast_error-value');
     errorValue.textContent = this.error;
     errorMessage.appendChild(errorValue);
   }
