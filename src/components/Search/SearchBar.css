@@ -1,0 +1,114 @@
+/* Search-bar */
+
+#searchbar {
+  min-width: 400px;
+  max-width: 500px;
+  height: 55px;
+  background-image: linear-gradient(
+    to right top,
+    #f4f4f4,
+    #f5f6f5,
+    #f7f7f7,
+    #f8f9f8,
+    #fafafa
+  );
+  margin: 0 auto 1rem auto;
+  border: 0.2px solid var(--color1);
+  border-radius: 0.75rem;
+}
+
+#searchbar:hover {
+  box-shadow: 2px 5px 15px 0 rgba(0, 0, 0, 0.05);
+}
+
+.search_input-wrapper {
+  height: 100%;
+  display: grid;
+  grid-template-columns: min-content auto min-content;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: inherit;
+}
+
+.search_input-wrapper:focus-within {
+  outline: 2px solid var(--color3);
+}
+
+.search_input-icon {
+  width: 48px;
+  height: 48px;
+  fill: var(--color5);
+  padding-left: 1rem;
+  cursor: text;
+}
+
+.search_input-wrapper:focus-within .search_input-icon {
+  fill: var(--color4);
+}
+
+#search {
+  width: 100%;
+  height: 100%;
+  appearance: none;
+  font-size: 1.2rem;
+  background-color: inherit;
+  color: var(--color5);
+  padding-left: 1rem;
+  border: 0;
+}
+
+#search::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+#search:focus-visible {
+  appearance: inherit;
+  outline: none;
+  border: inherit;
+}
+
+.search_input-wrapper:focus-within #search {
+  color: var(--color4);
+}
+
+.search_clear-button {
+  visibility: hidden;
+  display: grid;
+  place-content: center;
+  appearance: none;
+  background-color: transparent;
+  fill: var(--color5);
+  margin: 0 0.5rem;
+  border: 0;
+  cursor: pointer;
+}
+
+.search_clear-button.visible {
+    visibility: visible;
+}
+
+.search_clear-button:focus-visible {
+  appearance: none;
+  border: none;
+  outline: 2px solid var(--color3);
+  border-radius: 0.5rem;
+}
+
+.search_input-wrapper:focus-within .search_clear-button {
+  fill: var(--color4);
+}
+
+.search_clear-button-icon {
+  width: 38px;
+  height: 38px;
+}
+
+/* Disable input autofill background color */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition-delay: 9999s;
+  -webkit-transition-delay: 9999s;
+}
