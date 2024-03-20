@@ -63,7 +63,7 @@ export default class Forecast extends WeatherWidget {
 
       const dayConditionIcon = document.createElement("img");
       dayConditionIcon.classList.add("forecast_day-condition-icon");
-      dayConditionIcon.src = day.condition.icon;
+      dayConditionIcon.src = day.conditionIcon;
       dayCondition.appendChild(dayConditionIcon);
 
       if (day.chanceOfRain > 5) {
@@ -130,8 +130,7 @@ export default class Forecast extends WeatherWidget {
     target.forecast.forecastday.forEach((day) => {
       const customDay = {
         date: day.date,
-        condition: day.day.condition,
-        avgTemp: day.day[`avgtemp_${measurementScales.temperature}`],
+        conditionIcon: day.day.condition.icon,
         maxTemp: Math.round(
           day.day[`maxtemp_${measurementScales.temperature}`],
         ),
