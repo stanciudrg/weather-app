@@ -1,6 +1,5 @@
 import "./normalize.css";
 import "./style.css";
-import { loadSearchBar, loadWeatherWidgets, defaultLocation } from "./components/Controller";
+import init from "./components/Controller";
 
-loadSearchBar();
-loadWeatherWidgets(defaultLocation);
+init();

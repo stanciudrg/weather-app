@@ -1,6 +1,6 @@
 const measurementScales = {
-    temperature: 'c',
-    speed: 'kph'
+    temperature: '',
+    speed: ''
 }
 
 export default measurementScales;
