@@ -21,12 +21,16 @@ export default class SearchBar {
     this.container.id = "searchbar";
     this.DOMLocation.appendChild(this.container);
 
+    const searchBarWrapper = document.createElement('div');
+    searchBarWrapper.classList.add('searchbar_wrapper');
+    this.container.appendChild(searchBarWrapper);
+
     const label = document.createElement("label");
     label.setAttribute("for", "search");
-    this.container.appendChild(label);
+    searchBarWrapper.appendChild(label);
 
     this.inputWrapper.classList.add("search_input-wrapper");
-    this.container.appendChild(this.inputWrapper);
+    searchBarWrapper.appendChild(this.inputWrapper);
 
     this.searchIcon.classList.add("search_input-icon");
     this.searchIcon.addEventListener("click", this.focusSearchBar);
@@ -34,6 +38,7 @@ export default class SearchBar {
     this.searchInput.id = "search";
     this.searchInput.setAttribute("type", "search");
     this.searchInput.setAttribute("autocomplete", "off");
+    this.searchInput.setAttribute("placeholder", 'Search for a city')
     this.searchInput.addEventListener("focus", this.debounceSearchAction);
     this.searchInput.addEventListener("input", this.debounceSearchAction);
     this.searchInput.addEventListener("input", this.toggleClearButton);
@@ -47,6 +52,12 @@ export default class SearchBar {
       .querySelector("svg")
       .classList.add("search_clear-button-icon");
     this.inputWrapper.appendChild(this.clearButton);
+
+    document.addEventListener('click', this.blurInput);
+  }
+
+  blurInput = (e) => {
+    if (!e.target.closest('#searchbar')) this.searchInput.blur();
   }
 
   removeSearchResults = () => {
@@ -99,6 +110,7 @@ export default class SearchBar {
     this.searchInput.removeEventListener("input", this.toggleClearButton);
     this.searchInput.removeEventListener("blur", this.removeSearchResults);
     this.clearButton.removeEventListener("click", this.clearSearchBar);
+    document.removeEventListener('click', this.blurInput);
     this.container.remove();
   }
 }

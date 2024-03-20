@@ -1,10 +1,10 @@
 #forecast {
-  min-width: 400px;
+  min-width: 325px;
   max-width: 500px;
   display: flex;
   flex-direction: column;
   background-image: linear-gradient(
-    to right top,
+    to left bottom,
     #f4f4f4,
     #f5f6f5,
     #f7f7f7,
@@ -75,8 +75,10 @@
 }
 
 .forecast_day-secondary-info {
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: end;
   gap: 10px;
 }
 
@@ -96,7 +98,9 @@
 }
 
 .forecast_day-temp-dash {
-  width: 80px;
+  flex: 1;
+  min-width: 40px;
+  max-width: 80px;
   height: 4px;
   background-image: linear-gradient(
     to right in oklab,
@@ -120,4 +124,18 @@
 
 .forecast_error-value {
   font-size: 1.1rem;
+}
+
+@media (max-width: 375px) {
+  .forecast_title {
+    padding: 1rem;
+  }
+
+  .forecast_day {
+    padding: 0 1rem;
+  }
+
+  .forecast_error {
+    padding: 2rem 1.5rem;
+  }
 }

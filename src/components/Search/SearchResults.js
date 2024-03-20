@@ -12,7 +12,7 @@ export default class SearchResults extends WeatherWidget {
   async init() {
     super.init();
     this.container.classList.add("search-results");
-    this.insertInto(document.querySelector("#searchbar"));
+    this.insertInto(document.querySelector(".searchbar_wrapper"));
 
     try {
       const searchResults = await this.fetchData();

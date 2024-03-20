@@ -1,8 +1,7 @@
+
 import SearchBar from "./Search/SearchBar";
 import CurrentWeather from "./CurrentWeather/CurrentWeather";
 import Forecast from "./Forecast/Forecast";
-
-export const defaultLocation = 2018920;
 
 const weatherApp = {
   searchBar: new SearchBar(document.querySelector("body"), loadWeatherWidgets),
@@ -11,6 +10,12 @@ const weatherApp = {
 
 export function loadSearchBar() {
   weatherApp.searchBar.init();
+}
+
+function destroyPreviousWeatherWidgets() {
+  Object.entries(weatherApp.widgets).forEach((entry) => {
+    entry[1].destroy();
+  });
 }
 
 export function loadWeatherWidgets(location) {
@@ -22,8 +27,4 @@ export function loadWeatherWidgets(location) {
   weatherApp.widgets.forecast.init();
 }
 
-function destroyPreviousWeatherWidgets() {
-  Object.entries(weatherApp.widgets).forEach((entry) => {
-    entry[1].destroy();
-  });
-}
+export const defaultLocation = 2018920;
