@@ -11,12 +11,21 @@ export default class SearchBar {
     this.searchIcon = this.inputWrapper.querySelector("svg");
     this.searchInput = document.createElement("input");
     this.clearButton = document.createElement("button");
+    // The DOM element that is supposed to hold this DOM instance of SearchBar
     this.DOMLocation = DOMLocation;
+    // Property that will hold the "new SearchResults()"" object
     this.searchResults = "";
+    // Callback function that will be further passed to SearchResults. Points
+    // back to the Controller's loadWeatherWidgets function, and will be used
+    // to ask the Controller to load new weather widgets whenever the user
+    // selects a location from the results list of the searchbar
     this.callback = callback;
+    // Debouncer that limits the number of API calls made when the user types
+    // into the searchbar by waiting 500ms before submitting a request
     this.debounceSearchAction = SearchBar.debounce(this.getSearchResults, 500);
   }
 
+  // Creates the DOM content of the searchbar and adds event listeners
   init() {
     this.container.id = "searchbar";
     this.DOMLocation.appendChild(this.container);
@@ -56,14 +65,21 @@ export default class SearchBar {
     document.addEventListener('click', this.blurInput);
   }
 
+  // Manually blurs the 'search' input when the user clicks outside its
+  // boundaries
   blurInput = (e) => {
     if (!e.target.closest('#searchbar')) this.searchInput.blur();
   }
 
+  // Calls the destroy method on the SearchResults class to remove its elements
+  // from the DOM and detach its event listeners to prevent memory leaks
   removeSearchResults = () => {
     if (this.searchResults) this.searchResults.destroy();
   };
 
+  // Creates a SearchResults object. Provides the value of the search input
+  // as search parameters (first argument), and passes the callback
+  // described in the constructor (second argument)
   getSearchResults = (e) => {
     if (this.searchResults) this.searchResults.destroy();
     if (e.target.value.length === 0) return;
@@ -72,6 +88,7 @@ export default class SearchBar {
     this.searchResults.init();
   };
 
+  // Delays the execution of the callback for the specified waitTime
   static debounce(callback, waitTime) {
     let timer;
     return (...args) => {
@@ -82,10 +99,12 @@ export default class SearchBar {
     };
   }
 
+  // Manually applies focus to the searchbar input
   focusSearchBar = () => {
     this.searchInput.focus();
   };
 
+  // Toggles the visibility of the searchbar clear button
   toggleClearButton = () => {
     if (this.searchInput.value.length > 0) {
       this.clearButton.classList.add("visible");
@@ -103,6 +122,7 @@ export default class SearchBar {
     this.toggleClearButton();
   };
 
+  // Detaches event listeners and removes this container from the DOM
   destroy() {
     this.searchIcon.removeEventListener("click", this.focusSearchBar);
     this.searchInput.removeEventListener("focus", this.debounceSearchAction);

@@ -7,9 +7,12 @@ import measurementScales from "../helpers/measurementScales";
 export default class Forecast extends WeatherWidget {
   constructor(location) {
     super();
+    // Parameter used to fetch forecast data
     this.location = location;
   }
 
+  // Calls super to initialize loading animation then fills super's container
+  // with the result of the Promise
   async init() {
     super.init();
     this.container.id = "forecast";
@@ -26,6 +29,8 @@ export default class Forecast extends WeatherWidget {
     }
   }
 
+  // Replaces the loading animation started by super with the DOM content
+  // that holds the fetched data of Forecast
   displayData() {
     this.loadingAnimation.remove();
 
@@ -43,67 +48,67 @@ export default class Forecast extends WeatherWidget {
       dayContainer.classList.add("forecast_day");
       days.appendChild(dayContainer);
 
-      const dayPrimaryInfo = document.createElement('div');
-      dayPrimaryInfo.classList.add('forecast_day-primary-info');
+      const dayPrimaryInfo = document.createElement("div");
+      dayPrimaryInfo.classList.add("forecast_day-primary-info");
       dayContainer.appendChild(dayPrimaryInfo);
 
-      const dayTitle = document.createElement('h3');
-      dayTitle.classList.add('forecast_day-title');
+      const dayTitle = document.createElement("h3");
+      dayTitle.classList.add("forecast_day-title");
       dayTitle.textContent = Forecast.formatDate(day.date);
       dayPrimaryInfo.appendChild(dayTitle);
 
-      const dayCondition = document.createElement('div');
-      dayCondition.classList.add('forecast_day-condition');
+      const dayCondition = document.createElement("div");
+      dayCondition.classList.add("forecast_day-condition");
       dayPrimaryInfo.appendChild(dayCondition);
 
-      const dayConditionIcon = document.createElement('img');
-      dayConditionIcon.classList.add('forecast_day-condition-icon');
+      const dayConditionIcon = document.createElement("img");
+      dayConditionIcon.classList.add("forecast_day-condition-icon");
       dayConditionIcon.src = day.condition.icon;
       dayCondition.appendChild(dayConditionIcon);
 
       if (day.chanceOfRain > 5) {
-        const chanceOfRain = document.createElement('div');
-        chanceOfRain.classList.add('forecast_day-condition-cor');
+        const chanceOfRain = document.createElement("div");
+        chanceOfRain.classList.add("forecast_day-condition-cor");
         chanceOfRain.textContent = `${day.chanceOfRain}%`;
         dayCondition.appendChild(chanceOfRain);
       }
 
-      const daySecondaryInfo = document.createElement('div');
-      daySecondaryInfo.classList.add('forecast_day-secondary-info');
+      const daySecondaryInfo = document.createElement("div");
+      daySecondaryInfo.classList.add("forecast_day-secondary-info");
       dayContainer.appendChild(daySecondaryInfo);
 
-      const minTemp = document.createElement('div');
-      minTemp.classList.add('forecast_day-min-temp');
+      const minTemp = document.createElement("div");
+      minTemp.classList.add("forecast_day-min-temp");
       minTemp.textContent = `${day.minTemp}\u00B0`;
       daySecondaryInfo.appendChild(minTemp);
 
-      const dash = document.createElement('div');
-      dash.classList.add('forecast_day-temp-dash');
+      const dash = document.createElement("div");
+      dash.classList.add("forecast_day-temp-dash");
       daySecondaryInfo.appendChild(dash);
 
-      const maxTemp = document.createElement('div');
-      maxTemp.classList.add('forecast_day-max-temp');
+      const maxTemp = document.createElement("div");
+      maxTemp.classList.add("forecast_day-max-temp");
       maxTemp.textContent = `${day.maxTemp}\u00B0`;
       daySecondaryInfo.appendChild(maxTemp);
-
-  
     });
   }
 
+  // Replaces the loading animation started by super with the DOM content
+  // that holds the error name and error details of the fetch operation
   displayError() {
     this.loadingAnimation.remove();
-    
-    const errorMessage = document.createElement('div');
-    errorMessage.classList.add('forecast_error');
+
+    const errorMessage = document.createElement("div");
+    errorMessage.classList.add("forecast_error");
     this.container.appendChild(errorMessage);
 
-    const errorTitle = document.createElement('h2');
-    errorTitle.classList.add('forecast_error-title');
-    errorTitle.textContent = 'Unable to retrieve weather data';
+    const errorTitle = document.createElement("h2");
+    errorTitle.classList.add("forecast_error-title");
+    errorTitle.textContent = "Unable to retrieve weather data";
     errorMessage.appendChild(errorTitle);
 
-    const errorValue = document.createElement('p');
-    errorValue.classList.add('forecast_error-value');
+    const errorValue = document.createElement("p");
+    errorValue.classList.add("forecast_error-value");
     errorValue.textContent = this.error;
     errorMessage.appendChild(errorValue);
   }
@@ -127,8 +132,12 @@ export default class Forecast extends WeatherWidget {
         date: day.date,
         condition: day.day.condition,
         avgTemp: day.day[`avgtemp_${measurementScales.temperature}`],
-        maxTemp: Math.round(day.day[`maxtemp_${measurementScales.temperature}`]),
-        minTemp: Math.round(day.day[`mintemp_${measurementScales.temperature}`]),
+        maxTemp: Math.round(
+          day.day[`maxtemp_${measurementScales.temperature}`],
+        ),
+        minTemp: Math.round(
+          day.day[`mintemp_${measurementScales.temperature}`],
+        ),
         chanceOfRain: day.day.daily_chance_of_rain,
       };
       simplifiedForecastData.days.push(customDay);

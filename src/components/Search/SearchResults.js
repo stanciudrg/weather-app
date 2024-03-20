@@ -5,10 +5,13 @@ import "./SearchResults.css";
 export default class SearchResults extends WeatherWidget {
   constructor(parameters, callback) {
     super();
+    // Parameter used to fetch search results
     this.parameters = parameters;
     this.callback = callback;
   }
 
+  // Calls super to initialize loading animation then fills super's container
+  // with the result of the Promise
   async init() {
     super.init();
     this.container.classList.add("search-results");
@@ -26,6 +29,8 @@ export default class SearchResults extends WeatherWidget {
     }
   }
 
+  // Replaces the loading animation started by super with the DOM content
+  // that holds the fetched data of SearchResults
   displayData() {
     this.loadingAnimation.remove();
 
@@ -51,6 +56,8 @@ export default class SearchResults extends WeatherWidget {
     });
   }
 
+  // Replaces the loading animation started by super with the DOM content
+  // that holds the error name and error details of the fetch operation
   displayError() {
     this.loadingAnimation.remove();
 
@@ -69,6 +76,8 @@ export default class SearchResults extends WeatherWidget {
     errorMessage.appendChild(errorValue);
   }
 
+  // Calls Controller's loadWeatherWidgets callback function with the 
+  // dataset.id value of the clicked li item
   requestWeatherWidgets = (e) => {
     this.callback(e.target.dataset.id);
   };
@@ -99,6 +108,7 @@ export default class SearchResults extends WeatherWidget {
     return simplifiedSearchResults;
   }
 
+  // Detaches event listeners and removes super's this.container from the DOM;
   destroy() {
     const results = this.container.querySelectorAll("li");
 

@@ -6,9 +6,12 @@ import measurementScales from "../helpers/measurementScales";
 export default class CurrentWeather extends WeatherWidget {
   constructor(location) {
     super();
+    // Parameter used to fetch current weather data
     this.location = location;
   }
 
+  // Calls super to initialize loading animation then fills super's container
+  // with the result of the Promise
   async init() {
     super.init();
     this.container.id = "current-weather";
@@ -26,6 +29,8 @@ export default class CurrentWeather extends WeatherWidget {
     }
   }
 
+  // Replaces the loading animation started by super with the DOM content
+  // that holds the fetched data of CurrentWeather
   displayData() {
     this.loadingAnimation.remove();
 
@@ -100,6 +105,8 @@ export default class CurrentWeather extends WeatherWidget {
     wind.appendChild(windValue);
   }
 
+  // Replaces the loading animation started by super with the DOM content
+  // that holds the error name and error details of the fetch operation
   displayError() {
     this.loadingAnimation.remove();
 
