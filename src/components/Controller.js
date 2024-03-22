@@ -9,7 +9,7 @@ const weatherApp = {
   widgets: {},
 };
 
-export function loadSearchBar() {
+function loadSearchBar() {
   weatherApp.searchBar.init();
 }
 
@@ -23,7 +23,7 @@ function destroyPreviousWeatherWidgets() {
 }
 
 // Creates and initializes the weather widgets
-export function loadWeatherWidgets(location) {
+function loadWeatherWidgets(location) {
   if (Object.keys(weatherApp.widgets).length > 0)
     destroyPreviousWeatherWidgets();
   weatherApp.widgets.currentWeather = new CurrentWeather(`id:${location}`);
